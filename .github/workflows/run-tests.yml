@@ -19,16 +19,22 @@ jobs:
             - name: Checkout repository
               uses: actions/checkout@v4
 
-            - name: Set up Node.js
-              uses: actions/setup-node@v4
-              with:
-                node-version: 18
+            - name: Build Docker Image
+              run: docker build -t test-img .
 
-            - name: Install Dependencies
-              run: npm install
+            - name: Run tests within a Container
+              run: docker run test-img
 
-            - name: Install Jest 
-              run: npm install jest
+            # - name: Set up Node.js
+            #   uses: actions/setup-node@v4
+            #   with:
+            #     node-version: 18
 
-            - name: Run Tests
-              run: npm test
+            # - name: Install Dependencies
+            #   run: npm install
+
+            # - name: Install Jest 
+            #   run: npm install jest
+
+            # - name: Run Tests
+            #   run: npm test
